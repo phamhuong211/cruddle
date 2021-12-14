@@ -9,21 +9,39 @@ function AppFrame() {
         name: "Pham Huong",
         username: "huongpham",
         email: "huongpham211@gmail.com",
+        theme: 'light'
     });
+
+    console.log("ref",defaultState.current.theme);
     const location = useLocation();
     const skipToContentRef = useRef(null);
+    const [themeColor, setThemeColor] = useState("light")
 
     const [userMenuActive, setUserMenuActive] = useState(false);
     const [mobileNavigationActive, setMobileNavigationActive] = useState(false);
 
 
     const toggleUserMenuActive = useCallback(() => setUserMenuActive((userMenuActive) => !userMenuActive),[],);
-    const toggleMobileNavigationActive = useCallback(() => setMobileNavigationActive((mobileNavigationActive) => !mobileNavigationActive,),[],); 
+    const toggleMobileNavigationActive = useCallback(() => setMobileNavigationActive((mobileNavigationActive) => !mobileNavigationActive,),[],);
+
+    const handleChangeTheme = () => {
+        if(themeColor === 'light') {
+            setThemeColor('dark')
+            defaultState.current.theme = 'dark'
+        } else {
+            setThemeColor('light')
+            defaultState.current.theme = 'light'
+        }
+    }
     
     
     const userMenuActions = [
         {
-            items: [{content: 'Community forums'}],
+            items: ([
+                {
+                    content: 'Change Theme', 
+                    onAction: handleChangeTheme
+            }]),
         },
     ];
     
@@ -44,22 +62,21 @@ function AppFrame() {
         />
     );
 
-    const theme = {
-        logo: {
-            width: 125,
-            topBarSource:
-            'https://colorlib.com/wp/wp-content/uploads/sites/2/2013/10/BoldMedia-flat-logo.png',
-            contextualSaveBarSource:
-            'https://colorlib.com/wp/wp-content/uploads/sites/2/2013/10/BoldMedia-flat-logo.png',
-            url: '/',
-            accessibilityLabel: 'Crudie',
-        },
-    };
-
     return (
         <div style={{height: '500px'}}>
             <AppProvider
-                theme={theme}
+                theme={{
+                    colorScheme: `${themeColor}`,
+                    logo: {
+                        width: 125,
+                        topBarSource:
+                        'https://colorlib.com/wp/wp-content/uploads/sites/2/2013/10/BoldMedia-flat-logo.png',
+                        contextualSaveBarSource:
+                        'https://colorlib.com/wp/wp-content/uploads/sites/2/2013/10/BoldMedia-flat-logo.png',
+                        url: '/',
+                        accessibilityLabel: 'Crudie',
+                    }
+                  }}
                 i18n={{
                     Polaris: {
                         Avatar: {
@@ -109,8 +126,8 @@ function AppFrame() {
                                 label: "Products",
                               },
                               {
-                                url: "/settings",
-                                label: "Settings",
+                                url: "/users",
+                                label: "Users",
                               },
                             ]}
                           />
@@ -120,7 +137,7 @@ function AppFrame() {
                     onNavigationDismiss={toggleMobileNavigationActive}
                     skipToContentTarget={skipToContentRef.current}
                 >
-                    <FrameRoutes user={defaultState}/>
+                    <FrameRoutes user={defaultState.current.id}/>
                 </Frame>
             </AppProvider>
         </div>

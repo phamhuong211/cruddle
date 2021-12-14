@@ -7,6 +7,37 @@ html {
     box-sizing: border-box;
 }
 
-.row {
-    padding: 10px 0px 10px 0;
+
+.chart {
+    margin: 20px 0 20px 0;
+    padding: 20px 0px 20px 0;
+
+    .barchart{
+        .recharts-wrapper {
+            font-size: 12px;
+            .recharts-surface{
+                .recharts-layer:first-child {
+                    font-size: 12px;
+                    g .recharts-cartesian-axis-ticks {
+                        color: red !important;
+                    }
+                }
+            }
+        }
+    }
+
+    .piechart {
+        .inner-piechart {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .recharts-wrapper {
+                font-size: 12px;
+            }
+        }
+    }
+}
+
+.productById {
+    margin: 10px 0 10px 0;
 }

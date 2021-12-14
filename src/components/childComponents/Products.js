@@ -12,10 +12,13 @@ import {
 
 function Products(user) {
     const [products, setProducts] = useState([]);
-    // const userId = user.user.current.id;
-    const userId = 4;
+    const userId = user.user.user;
+    // console.log("productbyId ", user.user.user);
+    // const userId = 4;
     const [activeModalAddProduct, setActiveModalAddProduct] = useState(false);
     const [productsToAdd, setProductsToAdd] = useState({itemName: '', price: 0, userId: userId, quantity: 0})
+    const [activeModalDelete, setActiveMoalDelete] = useState(false)
+    const [deleteId, setDeleteId] = useState(null)
     const resourceName = {
         singular: 'product',
         plural: 'products',
@@ -40,11 +43,11 @@ function Products(user) {
     }
 
     /** Handle Remove Product */
-
-    const handleRemoveProduct = (idProduct) => {
+    const handleRemoveProduct = () => {
         const deleteApiProduct = async () => {
-            await axios.delete(`${config.apiURL}/products/${idProduct}`);
-            setProducts(products.filter(obj => obj.id !== idProduct))
+            await axios.delete(`${config.apiURL}/products/${deleteId}`);
+            setProducts(products.filter(obj => obj.id !== deleteId))
+            setActiveMoalDelete(!activeModalDelete)
         };
         deleteApiProduct()
     }
@@ -78,7 +81,7 @@ function Products(user) {
         <Modal
             activator={addProductActivator}
             open={activeModalAddProduct}
-            onClose={()=> setActiveModalAddProduct(!activeModalAddProduct)}
+            onClose={()=> setActiveModalAddProduct(activeModalAddProduct)}
             title="Add more product"
             primaryAction={{
                 content: 'Add',
@@ -103,6 +106,20 @@ function Products(user) {
                     </FormLayout.Group>
                 </FormLayout>
             </Card>
+        </Modal>
+    )
+
+    const modalRemoveConfirm = (
+        <Modal
+            open={activeModalDelete}
+            onClose={()=> setActiveMoalDelete(!activeModalDelete)}
+            title="Are you sure you want to delete this product?"
+            primaryAction={{
+                content: 'Yes, delete this product',
+                onAction: handleRemoveProduct
+            }}
+        >
+
         </Modal>
     )
 
@@ -142,6 +159,7 @@ function Products(user) {
     const rowActionMarkup = (
         <>
             {modalProductsMarkup}
+            {modalRemoveConfirm}
         </>
     )
 
@@ -156,8 +174,18 @@ function Products(user) {
             <IndexTable.Cell>{quantity}</IndexTable.Cell>
             <IndexTable.Cell>{price*quantity}</IndexTable.Cell>
             <IndexTable.Cell>
-                <Button icon={EditMinor} onClick={()=> handleEditProduct(id)}></Button>
-                <Button icon={DeleteMinor} onClick={()=> handleRemoveProduct(id)}></Button>
+                <Button 
+                    icon={EditMinor} 
+                    onClick={()=> handleEditProduct(id)}>
+                </Button>
+                {/* <Button icon={DeleteMinor} onClick={()=> handleRemoveProduct(id)}></Button> */}
+                <Button 
+                    icon={DeleteMinor} 
+                    onClick={()=> {
+                        setActiveMoalDelete(!activeModalDelete)
+                        setDeleteId(id)
+                    }}>
+                </Button>
             </IndexTable.Cell>
           </IndexTable.Row>
         ),
@@ -177,7 +205,7 @@ function Products(user) {
                     headings={[
                     {title: 'Product id'},
                     {title: 'Name'},
-                    {title: 'Price'},
+                    {title: <>Price <Button plain>Sort</Button></>},
                     {title: 'Quantity'},
                     {title: 'NET Sales', hidden: false},
                     {title: 'Actions'}

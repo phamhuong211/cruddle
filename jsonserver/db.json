@@ -1,0 +1,360 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Pham Huong",
+      "username": "huongpham",
+      "email": "huongpham211@gmail.com",
+      "age": 25,
+      "password": "Huong123",
+      "turnover": 57000000
+    },
+    {
+      "id": 2,
+      "name": "Nguyen Viet Hung",
+      "username": "viethung",
+      "email": "viethung146@gmail.com",
+      "age": 27,
+      "password": "Huong123",
+      "turnover": 35472000
+    },
+    {
+      "id": 3,
+      "name": "Phung Hieu",
+      "username": "hieuphung",
+      "email": "hieuphung242@gmail.com",
+      "age": 25,
+      "password": "Huong123",
+      "turnover": 81734000
+    },
+    {
+      "id": 4,
+      "name": "Phuong Linh",
+      "username": "phuonglinh",
+      "email": "phuonglinh205@gmail.com",
+      "age": 22,
+      "password": "Huong123",
+      "turnover": 23847000
+    },
+    {
+      "id": 5,
+      "name": "Hoang Ngoc Anh",
+      "username": "ngocanh",
+      "email": "ngocanh@gmail.com",
+      "age": 21,
+      "password": "Huong123",
+      "turnover": 47678000
+    }
+  ],
+  "products": [
+    {
+      "id": 2,
+      "userId": 2,
+      "itemName": "Cơm niêu thịt bò",
+      "price": 80000,
+      "quantity": 100
+    },
+    {
+      "id": 3,
+      "userId": 3,
+      "itemName": "Bánh rán mặn",
+      "price": 15000,
+      "quantity": 226
+    },
+    {
+      "id": 4,
+      "userId": 4,
+      "itemName": "Trà sữa x10 topping",
+      "price": 64000,
+      "quantity": 457
+    },
+    {
+      "id": 5,
+      "userId": 5,
+      "itemName": "Hồng trà vị nhài",
+      "price": 45000,
+      "quantity": 133
+    },
+    {
+      "id": 7,
+      "userId": 2,
+      "itemName": "Iphone XX",
+      "price": 15000000,
+      "quantity": 2
+    },
+    {
+      "id": 8,
+      "userId": 3,
+      "itemName": "Kem chanh bạc hà vị siêu đỉnh",
+      "price": 15000,
+      "quantity": 564
+    },
+    {
+      "id": 13,
+      "userId": 2,
+      "itemName": "Xác iphone 13",
+      "price": 450000,
+      "quantity": 3
+    },
+    {
+      "id": 14,
+      "userId": 3,
+      "itemName": "Thịt bò xào bắp bao tử",
+      "price": 150000,
+      "quantity": 45
+    },
+    {
+      "id": 15,
+      "userId": 4,
+      "itemName": "Trà đào cam sả",
+      "price": 35000,
+      "quantity": 76
+    },
+    {
+      "id": 16,
+      "userId": 5,
+      "itemName": "Trà bá tước",
+      "price": 55000,
+      "quantity": 13
+    },
+    {
+      "id": 17,
+      "userId": 2,
+      "itemName": "Chocochips",
+      "price": 23000,
+      "quantity": 24
+    },
+    {
+      "id": 18,
+      "userId": 2,
+      "itemName": "Hot dog",
+      "price": 15000,
+      "quantity": 173
+    },
+    {
+      "id": 19,
+      "userId": 4,
+      "itemName": "Combo bò nướng phô mai",
+      "price": 550000,
+      "quantity": 17
+    },
+    {
+      "id": 20,
+      "userId": 4,
+      "itemName": "Phở cuốn",
+      "price": 70000,
+      "quantity": 33
+    },
+    {
+      "id": 21,
+      "userId": 1,
+      "itemName": "Nem nướng Nha Trang",
+      "price": 35000,
+      "quantity": 67
+    },
+    {
+      "id": 22,
+      "userId": 3,
+      "itemName": "Bánh mì nướng mật ong",
+      "price": 15000,
+      "quantity": 765
+    },
+    {
+      "id": 23,
+      "userId": 5,
+      "itemName": "Kem thủy tạ",
+      "price": 15000,
+      "quantity": 229
+    },
+    {
+      "itemName": "Bánh rán mặn",
+      "price": "12000",
+      "userId": 2,
+      "quantity": 0,
+      "id": 28
+    },
+    {
+      "itemName": "Mì xào bò",
+      "price": "35000",
+      "userId": 2,
+      "quantity": 0,
+      "id": 29
+    },
+    {
+      "itemName": "Bánh tráng trộn",
+      "price": "20000",
+      "userId": 3,
+      "quantity": 0,
+      "id": 30
+    },
+    {
+      "itemName": "Gà tần",
+      "price": "45000",
+      "userId": 1,
+      "quantity": "34",
+      "id": 33
+    },
+    {
+      "itemName": "banh mi",
+      "price": "10000",
+      "userId": 1,
+      "quantity": 0,
+      "id": 34
+    },
+    {
+      "itemName": "Gà nướng",
+      "price": "210000",
+      "userId": 1,
+      "quantity": "20",
+      "id": 35
+    }
+  ],
+  "dashboard": [
+    {
+      "id": 1,
+      "userId": 1,
+      "dashboard": [
+        {
+          "month": "Jan",
+          "turnover": 18000000,
+          "profit": 6000000
+        },
+        {
+          "month": "Feb",
+          "turnover": 8200000,
+          "profit": 4073000
+        },
+        {
+          "month": "Mar",
+          "turnover": 9234000,
+          "profit": 1234000
+        },
+        {
+          "month": "Apr",
+          "turnover": 12000000,
+          "profit": 5000000
+        },
+        {
+          "month": "May",
+          "turnover": 9843000,
+          "profit": 5843000
+        },
+        {
+          "month": "Jun",
+          "turnover": 6235000,
+          "profit": 2235000
+        },
+        {
+          "month": "Jul",
+          "turnover": 7352000,
+          "profit": 1352000
+        },
+        {
+          "month": "Aug",
+          "turnover": 4464000,
+          "profit": 1464000
+        },
+        {
+          "month": "Sep",
+          "turnover": 7464000,
+          "profit": 2464000
+        },
+        {
+          "month": "Oct",
+          "turnover": 3900000,
+          "profit": 1000000
+        },
+        {
+          "month": "Nov",
+          "turnover": 8463000,
+          "profit": 2463000
+        },
+        {
+          "month": "Dec",
+          "turnover": 10000000,
+          "profit": 4000000
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "userId": 2,
+      "dashboard": {
+        "y2020": {
+          "Jan": 30000000,
+          "Feb": 6200000,
+          "Mar": 1234000,
+          "Apr": 7743000,
+          "May": 3847000,
+          "Jun": 9235000,
+          "Jul": 4352000,
+          "Aug": 8464000,
+          "Sep": 6464000,
+          "Oct": 89000000,
+          "Nov": 3463000,
+          "Dec": 67000000
+        }
+      }
+    },
+    {
+      "id": 3,
+      "userId": 3,
+      "dashboard": {
+        "y2020": {
+          "Jan": 7473000,
+          "Feb": 6990000,
+          "Mar": 1234000,
+          "Apr": 3743000,
+          "May": 8843000,
+          "Jun": 8462000,
+          "Jul": 352000,
+          "Aug": 9464000,
+          "Sep": 5464000,
+          "Oct": 49000000,
+          "Nov": 1463000,
+          "Dec": 2349000
+        }
+      }
+    },
+    {
+      "id": 4,
+      "userId": 4,
+      "dashboard": {
+        "y2020": {
+          "Jan": 8635000,
+          "Feb": 7428000,
+          "Mar": 7423000,
+          "Apr": 1388000,
+          "May": 7582000,
+          "Jun": 2846000,
+          "Jul": 4657000,
+          "Aug": 6353000,
+          "Sep": 5700000,
+          "Oct": 3467000,
+          "Nov": 1230000,
+          "Dec": 4500000
+        }
+      }
+    },
+    {
+      "id": 5,
+      "userId": 5,
+      "dashboard": {
+        "y2020": {
+          "Jan": 4570000,
+          "Feb": 3480000,
+          "Mar": 6740000,
+          "Apr": 5643000,
+          "May": 7890000,
+          "Jun": 2345000,
+          "Jul": 5645000,
+          "Aug": 4654000,
+          "Sep": 5670000,
+          "Oct": 6790000,
+          "Nov": 5340000,
+          "Dec": 5643000
+        }
+      }
+    }
+  ]
+}

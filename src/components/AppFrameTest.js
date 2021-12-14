@@ -1,6 +1,6 @@
 import React, {useRef} from "react";
 import { useLocation } from "react-router-dom";
-import { Frame, TopBar, Navigation } from "@shopify/polaris";
+import { Frame, TopBar, Navigation, AppProvider } from "@shopify/polaris";
 import FrameRoutes from "./FrameRoutes";
 
 function AppFrame() {
@@ -17,38 +17,45 @@ function AppFrame() {
   const toggleMobileNavigationActive = React.useCallback(() =>setMobileNavigationActive((mobileNavigationActive) => !mobileNavigationActive),[]);
 
   return (
-    <Frame
-      showMobileNavigation={mobileNavigationActive}
-      onNavigationDismiss={toggleMobileNavigationActive}
-      topBar={
-        <TopBar
-          showNavigationToggle
-          onNavigationToggle={toggleMobileNavigationActive}
-        />
-      }
-      navigation={
-        <Navigation location={location.pathname}>
-          <Navigation.Section
-            items={[
-              {
-                url: "/",
-                label: "Dashboard",
-              },
-              {
-                url: "/products",
-                label: "Products",
-              },
-              {
-                url: "/settings",
-                label: "Settings",
-              },
-            ]}
-          />
-        </Navigation>
-      }
+    <AppProvider
+      i18n={{}}
+      theme={{
+        colorScheme: 'dark',
+      }}
     >
-      <FrameRoutes user={defaultState}/>
-    </Frame>
+      <Frame
+        showMobileNavigation={mobileNavigationActive}
+        onNavigationDismiss={toggleMobileNavigationActive}
+        topBar={
+          <TopBar
+            showNavigationToggle
+            onNavigationToggle={toggleMobileNavigationActive}
+          />
+        }
+        navigation={
+          <Navigation location={location.pathname}>
+            <Navigation.Section
+              items={[
+                {
+                  url: "/",
+                  label: "Dashboard",
+                },
+                {
+                  url: "/products",
+                  label: "Products",
+                },
+                {
+                  url: "/settings",
+                  label: "Settings",
+                },
+              ]}
+            />
+          </Navigation>
+        }
+      >
+        <FrameRoutes user={defaultState}/>
+      </Frame>
+    </AppProvider>
   );
 }
 
