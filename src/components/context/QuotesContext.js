@@ -1,0 +1,25 @@
+import React, {useState, createContext} from 'react';
+
+//1. Create Context
+//2. Create Provider
+
+const QuotesContext = createContext()
+
+function QuotesProvider({children}) {
+    const [data, setData] = useState('hello')
+    console.log("quotescontext.js",data);
+
+    const handleChangeQuote = (props) => {
+        setData(props)
+    }
+
+    const value = {data, handleChangeQuote}
+
+    return (
+        <QuotesContext.Provider value={value}>
+            {children}
+        </QuotesContext.Provider>
+    );
+}
+
+export {QuotesProvider, QuotesContext};

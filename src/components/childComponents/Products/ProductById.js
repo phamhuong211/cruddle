@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import config from '../../config'
+import config from '../../../config'
 import { Button, Card, FormLayout, Modal, Page, TextField, TextStyle } from '@shopify/polaris';
 import { useParams } from 'react-router';
 
@@ -15,9 +15,7 @@ function ProductById() {
         setProduct(dataClone);
     }
 
-    const [activeModalEditProduct, setActiveModalEditProduct] = useState(false);
-
-
+    
     const handleEdit = () => {
         const updateProduct = async () => {
             const res = await axios.put(`${config.apiURL}/products/${productId}`, product)
@@ -34,8 +32,9 @@ function ProductById() {
             setProduct(res.data)
         }
         getProductById();
-    },[productId])
-
+    },[productId])    
+    
+    const [activeModalEditProduct, setActiveModalEditProduct] = useState(false);
     const productActivator = (<Button onClick={()=> setActiveModalEditProduct(!activeModalEditProduct)}>Edit Products</Button>)
 
     const modalMarkup = (

@@ -30,7 +30,7 @@ const renderActiveShape = (props) => {
     return (
       <g>
         <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill}>
-          {payload.name}
+          {payload.month}
         </text>
         <Sector
           cx={cx}
@@ -78,8 +78,6 @@ const renderActiveShape = (props) => {
 
 function PieChartDashboard(data) {
     const pieData = data.data
-    console.log(data.data);
-    
     const [activeIndex, setActiveIndex] = useState(0);
     const onPieEnter = useCallback(
       (_, index) => {

@@ -1,7 +1,8 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useContext, useRef, useState } from 'react';
 import { useLocation } from "react-router-dom";
 import { Frame, TopBar, Navigation, AppProvider } from "@shopify/polaris";
 import FrameRoutes from "./FrameRoutes";
+import {ThemeContext} from './context/ThemeContext'
 
 function AppFrame() {
     const defaultState = useRef({
@@ -12,10 +13,11 @@ function AppFrame() {
         theme: 'light'
     });
 
-    console.log("ref",defaultState.current.theme);
+    const themeContext = useContext(ThemeContext)
+
     const location = useLocation();
     const skipToContentRef = useRef(null);
-    const [themeColor, setThemeColor] = useState("light")
+    // const [themeColor, setThemeColor] = useState("light")
 
     const [userMenuActive, setUserMenuActive] = useState(false);
     const [mobileNavigationActive, setMobileNavigationActive] = useState(false);
@@ -24,33 +26,33 @@ function AppFrame() {
     const toggleUserMenuActive = useCallback(() => setUserMenuActive((userMenuActive) => !userMenuActive),[],);
     const toggleMobileNavigationActive = useCallback(() => setMobileNavigationActive((mobileNavigationActive) => !mobileNavigationActive,),[],);
 
-    const handleChangeTheme = () => {
-        if(themeColor === 'light') {
-            setThemeColor('dark')
-            defaultState.current.theme = 'dark'
-        } else {
-            setThemeColor('light')
-            defaultState.current.theme = 'light'
-        }
-    }
+    // const handleChangeTheme = () => {
+    //     if(themeColor === 'light') {
+    //         setThemeColor('dark')
+    //         defaultState.current.theme = 'dark'
+    //     } else {
+    //         setThemeColor('light')
+    //         defaultState.current.theme = 'light'
+    //     }
+    // }
     
     
-    const userMenuActions = [
-        {
-            items: ([
-                {
-                    content: 'Change Theme', 
-                    onAction: handleChangeTheme
-            }]),
-        },
-    ];
+    // const userMenuActions = [
+    //     {
+    //         items: ([
+    //             {
+    //                 content: 'Change Theme', 
+    //                 onAction: handleChangeTheme
+    //         }]),
+    //     },
+    // ];
     
     const topBarMarkup = (
         <TopBar
             showNavigationToggle
             userMenu={
                 <TopBar.UserMenu
-                    actions={userMenuActions}
+                    // actions={userMenuActions}
                     name={defaultState.current.name}
                     detail={defaultState.current.email}
                     initials={defaultState.current.name.charAt(0)}
@@ -66,7 +68,7 @@ function AppFrame() {
         <div style={{height: '500px'}}>
             <AppProvider
                 theme={{
-                    colorScheme: `${themeColor}`,
+                    colorScheme: `${themeContext.theme}`,
                     logo: {
                         width: 125,
                         topBarSource:
@@ -126,8 +128,8 @@ function AppFrame() {
                                 label: "Products",
                               },
                               {
-                                url: "/users",
-                                label: "Users",
+                                url: "/setting",
+                                label: "Setting",
                               },
                             ]}
                           />

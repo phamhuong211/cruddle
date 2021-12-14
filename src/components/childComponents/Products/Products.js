@@ -1,39 +1,49 @@
 import React, {useCallback, useEffect, useState } from 'react';
 import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
-import {Button, Card,FormLayout,IndexTable, Modal, Page,TextField,TextStyle } from '@shopify/polaris';
-import config from '../../config';
+import {Button, Card,FormLayout,IndexTable, Modal, Page,TextContainer,TextField,TextStyle } from '@shopify/polaris';
+import config from '../../../config';
 import {
     EditMinor,
-    DeleteMinor
+    DeleteMinor,
+    SortMinor
   } from '@shopify/polaris-icons';
 
 // import ModalProduct from './ModalProduct'
 
 function Products(user) {
-    const [products, setProducts] = useState([]);
     const userId = user.user.user;
-    // console.log("productbyId ", user.user.user);
-    // const userId = 4;
+    const [products, setProducts] = useState([]);
+
     const [activeModalAddProduct, setActiveModalAddProduct] = useState(false);
     const [productsToAdd, setProductsToAdd] = useState({itemName: '', price: 0, userId: userId, quantity: 0})
     const [activeModalDelete, setActiveMoalDelete] = useState(false)
     const [deleteId, setDeleteId] = useState(null)
-    const resourceName = {
-        singular: 'product',
-        plural: 'products',
-    };
+    const resourceName = {singular: 'product', plural: 'products'};
 
     const handleAddProductChange = useCallback(() => setActiveModalAddProduct(!activeModalAddProduct), [activeModalAddProduct])
 
-    /**onClick triiger ModalEditProducts */
-    // const handleEditProduct = (idProduct) => {
-    //     const putAPiProduct = async () => {
-    //         // const res = await axios.put(`${config.apiURL}/products/${idProduct}`, productToEdit);
-    //         console.log("edit on id ", idProduct)
-    //     };
-    //     putAPiProduct()
+    // const handleSortPrice = () => {
+    //     const sortPrice = async () => {
+    //         const res = await axios.get(`${config.apiURL}/products?userId=${userId}&_sort=price`)
+    //         console.log(res.data);
+    //     }
+    //     sortPrice()
     // }
+
+    const [sortToUp, setSortToUp] = useState(false)
+    const handleSortPrice = ()=> {
+        const sortProduct = [...products]
+        if(sortToUp) {
+            sortProduct.sort((a, b)=> (a.price - b.price))
+            setProducts(sortProduct)
+            setSortToUp(!sortToUp)
+        } else {
+            sortProduct.sort((a, b)=> (b.price - a.price))
+            setProducts(sortProduct)
+            setSortToUp(!sortToUp)
+        }
+    }
 
 
     /**Onclick redirect to product/id */
@@ -74,14 +84,12 @@ function Products(user) {
     },[userId]);
 
     /**Modal trigger onClick Add Products */
-
     const addProductActivator = (<Button onClick={handleAddProductChange}>Add Products</Button>)
-
     const modalProductsMarkup = (
         <Modal
             activator={addProductActivator}
             open={activeModalAddProduct}
-            onClose={()=> setActiveModalAddProduct(activeModalAddProduct)}
+            onClose={(activeModalAddProduct)=> setActiveModalAddProduct(!activeModalAddProduct)}
             title="Add more product"
             primaryAction={{
                 content: 'Add',
@@ -113,48 +121,21 @@ function Products(user) {
         <Modal
             open={activeModalDelete}
             onClose={()=> setActiveMoalDelete(!activeModalDelete)}
-            title="Are you sure you want to delete this product?"
             primaryAction={{
                 content: 'Yes, delete this product',
                 onAction: handleRemoveProduct
             }}
         >
-
+            <Modal.Section>
+                <TextContainer>
+                    <p>
+                        Are you sure you want to delete this product?
+                    </p>
+                </TextContainer>
+            </Modal.Section>
         </Modal>
     )
 
-    /**Modal trigger onClick button Edit on Action col */
-    // const modalEditProduct = (
-    //     <Modal
-    //         activator={handleEditProduct}
-    //         open={activeModalEditProduct}
-    //         onClose={handleAddProductChange}
-    //         title="Add more product"
-    //         primaryAction={{
-    //             content: 'Add',
-    //             onAction: handlePost,
-    //         }}
-    //     >
-    //         <Card sectioned>
-    //             <FormLayout>
-    //                 <FormLayout.Group >
-    //                     <TextField 
-    //                         label="Name" 
-    //                         type="text" 
-    //                         value={productToEdit.itemName} 
-    //                         onChange={(productName) => {setProductToEdit({...productsToAdd, itemName: productName,})} } 
-    //                         autoComplete="off" />
-    //                     <TextField 
-    //                         label="Price" 
-    //                         type="number" 
-    //                         value={productToEdit.price} 
-    //                         prefix="vnđ" onChange={(productPrice) => {setProductToEdit({...productsToAdd,  price: productPrice,})} } 
-    //                         autoComplete="off" />
-    //                 </FormLayout.Group>
-    //             </FormLayout>
-    //         </Card>
-    //     </Modal>
-    // )
 
     const rowActionMarkup = (
         <>
@@ -175,11 +156,13 @@ function Products(user) {
             <IndexTable.Cell>{price*quantity}</IndexTable.Cell>
             <IndexTable.Cell>
                 <Button 
+                    plain
                     icon={EditMinor} 
                     onClick={()=> handleEditProduct(id)}>
                 </Button>
                 {/* <Button icon={DeleteMinor} onClick={()=> handleRemoveProduct(id)}></Button> */}
                 <Button 
+                    plain
                     icon={DeleteMinor} 
                     onClick={()=> {
                         setActiveMoalDelete(!activeModalDelete)
@@ -205,7 +188,7 @@ function Products(user) {
                     headings={[
                     {title: 'Product id'},
                     {title: 'Name'},
-                    {title: <>Price <Button plain>Sort</Button></>},
+                    {title: <>Price <Button plain onClick={handleSortPrice} icon={SortMinor}></Button></>},
                     {title: 'Quantity'},
                     {title: 'NET Sales', hidden: false},
                     {title: 'Actions'}
