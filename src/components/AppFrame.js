@@ -1,8 +1,8 @@
-import React, { useCallback, useContext, useRef, useState } from 'react';
-import { useLocation } from "react-router-dom";
-import { Frame, TopBar, Navigation, AppProvider } from "@shopify/polaris";
+import React, { useCallback, useRef, useState } from 'react';
+import { Frame, TopBar} from "@shopify/polaris";
 import FrameRoutes from "./FrameRoutes";
-import {ThemeContext} from './context/ThemeContext'
+
+import AppNavigation from "./AppNavigation";
 
 function AppFrame() {
     const defaultState = useRef({
@@ -13,11 +13,7 @@ function AppFrame() {
         theme: 'light'
     });
 
-    const themeContext = useContext(ThemeContext)
-
-    const location = useLocation();
     const skipToContentRef = useRef(null);
-    // const [themeColor, setThemeColor] = useState("light")
 
     const [userMenuActive, setUserMenuActive] = useState(false);
     const [mobileNavigationActive, setMobileNavigationActive] = useState(false);
@@ -26,27 +22,6 @@ function AppFrame() {
     const toggleUserMenuActive = useCallback(() => setUserMenuActive((userMenuActive) => !userMenuActive),[],);
     const toggleMobileNavigationActive = useCallback(() => setMobileNavigationActive((mobileNavigationActive) => !mobileNavigationActive,),[],);
 
-    // const handleChangeTheme = () => {
-    //     if(themeColor === 'light') {
-    //         setThemeColor('dark')
-    //         defaultState.current.theme = 'dark'
-    //     } else {
-    //         setThemeColor('light')
-    //         defaultState.current.theme = 'light'
-    //     }
-    // }
-    
-    
-    // const userMenuActions = [
-    //     {
-    //         items: ([
-    //             {
-    //                 content: 'Change Theme', 
-    //                 onAction: handleChangeTheme
-    //         }]),
-    //     },
-    // ];
-    
     const topBarMarkup = (
         <TopBar
             showNavigationToggle
@@ -66,82 +41,15 @@ function AppFrame() {
 
     return (
         <div style={{height: '500px'}}>
-            <AppProvider
-                theme={{
-                    colorScheme: `${themeContext.theme}`,
-                    logo: {
-                        width: 125,
-                        topBarSource:
-                        'https://colorlib.com/wp/wp-content/uploads/sites/2/2013/10/BoldMedia-flat-logo.png',
-                        contextualSaveBarSource:
-                        'https://colorlib.com/wp/wp-content/uploads/sites/2/2013/10/BoldMedia-flat-logo.png',
-                        url: '/',
-                        accessibilityLabel: 'Crudie',
-                    }
-                  }}
-                i18n={{
-                    Polaris: {
-                        Avatar: {
-                            label: 'Avatar',
-                            labelWithInitials: 'Avatar with initials {initials}',
-                        },
-                        ContextualSaveBar: {
-                            save: 'Save',
-                            discard: 'Discard',
-                        },
-                        TextField: {
-                            characterCount: '{count} characters',
-                        },
-                        TopBar: {
-                            toggleMenuLabel: 'Toggle menu',
-
-                            SearchField: {
-                            clearButtonLabel: 'Clear',
-                            search: 'Search',
-                            },
-                        },
-                        Modal: {
-                            iFrameTitle: 'body markup',
-                        },
-                        Frame: {
-                            skipToContent: 'Skip to content',
-                            navigationLabel: 'Navigation',
-                            Navigation: {
-                                closeMobileNavigationLabel: 'Close navigation',
-                            },
-                        },
-                    },
-                }}
+            <Frame
+                topBar={topBarMarkup}
+                navigation={<AppNavigation/>}
+                showMobileNavigation={mobileNavigationActive}
+                onNavigationDismiss={toggleMobileNavigationActive}
+                skipToContentTarget={skipToContentRef.current}
             >
-                <Frame
-                    topBar={topBarMarkup}
-                    navigation={
-                        <Navigation location={location.pathname}>
-                          <Navigation.Section
-                            items={[
-                              {
-                                url: "/dashboard",
-                                label: "Dashboard",
-                              },
-                              {
-                                url: "/products",
-                                label: "Products",
-                              },
-                              {
-                                url: "/setting",
-                                label: "Setting",
-                              },
-                            ]}
-                          />
-                        </Navigation>
-                      }
-                    showMobileNavigation={mobileNavigationActive}
-                    onNavigationDismiss={toggleMobileNavigationActive}
-                    skipToContentTarget={skipToContentRef.current}
-                >
-                    <FrameRoutes user={defaultState.current.id}/>
-                </Frame>
-            </AppProvider>
+                <FrameRoutes user={defaultState.current.id}/>
+            </Frame>
         </div>
     );
 }

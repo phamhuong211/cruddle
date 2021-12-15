@@ -3,24 +3,23 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import 'bootstrap/dist/css/bootstrap.css';
 
+import 'bootstrap/dist/css/bootstrap.css';
 import '@shopify/polaris/build/esm/styles.css';
-import {AppProvider, } from '@shopify/polaris';
-import enTranslations from '@shopify/polaris/locales/en.json';
 
 import {ThemeProvider} from './components/context/ThemeContext';
 import { QuotesProvider } from './components/context/QuotesContext';
+import {GlobalProvider} from './components/global'
 
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider>
-    <QuotesProvider>
-      <AppProvider i18n={enTranslations}>
-        <App />
-      </AppProvider>
-      </QuotesProvider>
-    </ThemeProvider>
+    <GlobalProvider>
+      <ThemeProvider>
+        <QuotesProvider>
+          <App />
+        </QuotesProvider>
+      </ThemeProvider>
+    </GlobalProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

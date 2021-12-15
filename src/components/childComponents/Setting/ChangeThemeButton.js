@@ -4,12 +4,13 @@ import { Button, Card} from '@shopify/polaris';
 
 function ChangeThemeButton(props) {
     const themeContext = useContext(ThemeContext)
+
     return (
         <Card sectioned title="Change Theme">
             <Button
                 onClick={themeContext.toggleTheme}
             >
-                On
+                {themeContext.theme}
             </Button>
         </Card>
     );

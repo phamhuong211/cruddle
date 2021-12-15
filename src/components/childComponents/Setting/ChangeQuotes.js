@@ -1,22 +1,20 @@
-import { Button, Card, TextField } from '@shopify/polaris';
-import React, { useContext, useState } from 'react';
+import {Card, TextField } from '@shopify/polaris';
+import React, { useContext} from 'react';
 import {QuotesContext} from '../../context/QuotesContext';
 
 function ChangeQuotes() {
-    const [quote, setQuote] = useState('');
     const quoteContext = useContext(QuotesContext);
+    
     return (
-        <Card sectioned>
+        <Card sectioned title="Write your quotes">
             <TextField
-                value={quote}
+                value={quoteContext.data}
                 onChange={(value) => {
-                    setQuote(value)
                     quoteContext.handleChangeQuote(value)
                 }}
                 type="text"
                 autoComplete="off"
             />
-            <Button ></Button>
         </Card>
     );
 }

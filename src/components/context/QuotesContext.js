@@ -7,7 +7,6 @@ const QuotesContext = createContext()
 
 function QuotesProvider({children}) {
     const [data, setData] = useState('hello')
-    console.log("quotescontext.js",data);
 
     const handleChangeQuote = (props) => {
         setData(props)
