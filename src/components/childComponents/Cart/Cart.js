@@ -1,15 +1,17 @@
 import { Button, Card, Page, TextContainer, TextStyle } from '@shopify/polaris';
-import {useGlobal} from '../../global';
+import {useGlobal, actions} from '../../global';
 import {
     DeleteMinor
-  } from '@shopify/polaris-icons';
+} from '@shopify/polaris-icons';
+import cart from '../../../images/cart.png'
+import { Link } from 'react-router-dom';
 
 function Cart() {
     const [state, dispatch] = useGlobal()
     console.log(state);
 
     const handleDelete = (productId) => {
-
+        dispatch(actions.deleteItem(productId))
     }
     return state.length > 0 ? (
         <Page>
@@ -36,7 +38,13 @@ function Cart() {
     ) : (
         <Page>
             <Card sectioned>
-                Nothing on your cart
+                <div className="cart-img">
+                    <img src={cart} alt="cart"/>
+                </div>
+                <div className="cart-content">
+                    <TextContainer>Nothing on your cart. Visit {"  "}<Link to="/stores">Stores</Link></TextContainer>
+                    
+                </div>
             </Card>
         </Page>
     )

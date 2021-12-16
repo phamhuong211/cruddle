@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Page, Card,FooterHelp, Link} from '@shopify/polaris';
+import {Page, Card} from '@shopify/polaris';
 import axios from 'axios';
 import config from '../../../config'
 
@@ -36,12 +36,6 @@ function Dashboard(user) {
             {chartMarkup}
             <Card sectioned>
             </Card>
-            <FooterHelp>
-                Need help? {' '}
-                <Link external url="https://google.com">
-                    click here
-                </Link>
-            </FooterHelp>
         </Page>
     )
 }

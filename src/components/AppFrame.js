@@ -1,5 +1,5 @@
 import React, { useCallback, useRef, useState } from 'react';
-import { Frame, TopBar} from "@shopify/polaris";
+import { FooterHelp, Frame, Link, TopBar} from "@shopify/polaris";
 import FrameRoutes from "./FrameRoutes";
 
 import AppNavigation from "./AppNavigation";
@@ -49,6 +49,13 @@ function AppFrame() {
                 skipToContentTarget={skipToContentRef.current}
             >
                 <FrameRoutes user={defaultState.current.id}/>
+                
+                <FooterHelp>
+                    Need help? {' '}
+                    <Link external url="https://google.com">
+                        click here
+                    </Link>
+                </FooterHelp>
             </Frame>
         </div>
     );

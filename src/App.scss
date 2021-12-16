@@ -7,6 +7,12 @@ html {
     box-sizing: border-box;
 }
 
+a {
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+
 
 .chart {
     margin: 20px 0 20px 0;
@@ -40,4 +46,43 @@ html {
 
 .productById {
     margin: 10px 0 10px 0;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .pagination-inner {
+        margin: 0 10px 0 10px;
+        button {
+            cursor: pointer;
+            width: 20px;
+            background: none;
+            border: none;
+            .active {
+                color: #afb0f3;
+            }
+        }
+    
+        button:hover {
+            background: #afb0f3;
+        }
+    }
+
+}
+
+.cart-img {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+        width: 200px;
+        height: auto;
+    }
+}
+
+.cart-content {
+    @extend .cart-img
 }

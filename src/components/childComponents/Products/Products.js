@@ -8,6 +8,7 @@ import {
     DeleteMinor,
     SortMinor
   } from '@shopify/polaris-icons';
+  import Paginate from "../Paginate";
 
 // import ModalProduct from './ModalProduct'
 
@@ -17,9 +18,23 @@ function Products(user) {
 
     const [activeModalAddProduct, setActiveModalAddProduct] = useState(false);
     const [productsToAdd, setProductsToAdd] = useState({itemName: '', price: 0, userId: userId, quantity: 0})
+    console.log(productsToAdd);
     const [activeModalDelete, setActiveMoalDelete] = useState(false)
     const [deleteId, setDeleteId] = useState(null)
     const resourceName = {singular: 'product', plural: 'products'};
+
+
+    /**Pagination */
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const limit = 5;
+
+    const   indexOfLast = currentPage * limit,
+            indexOfFirst = indexOfLast - limit,
+            currentItems = products.slice(indexOfFirst, indexOfLast);
+
+    const paginate = pageNumber => setCurrentPage(pageNumber);
+    const totalItems = products.length;
 
     const handleAddProductChange = useCallback(() => setActiveModalAddProduct(!activeModalAddProduct), [activeModalAddProduct])
 
@@ -38,10 +53,12 @@ function Products(user) {
             sortProduct.sort((a, b)=> (a.price - b.price))
             setProducts(sortProduct)
             setSortToUp(!sortToUp)
+            setCurrentPage(1)
         } else {
             sortProduct.sort((a, b)=> (b.price - a.price))
             setProducts(sortProduct)
             setSortToUp(!sortToUp)
+            setCurrentPage(1)
         }
     }
 
@@ -65,7 +82,9 @@ function Products(user) {
     /**Add new Product */
     const handlePost =() => {
         const postApiProduct = async () => {
-            const res = await axios.post(`${config.apiURL}/products`, productsToAdd)
+            let dataClone = productsToAdd
+            dataClone.price = parseInt(dataClone.price)
+            const res = await axios.post(`${config.apiURL}/products`, dataClone)
             setProducts([...products, res.data])
             setProductsToAdd({itemName: '', price: 0, userId: userId, quantity: 0})
             setActiveModalAddProduct(!activeModalAddProduct)
@@ -83,7 +102,9 @@ function Products(user) {
         getAPIProducts()
     },[userId]);
 
-    /**Modal trigger onClick Add Products */
+    
+
+    /**onClick to trigger Modal Add Products */
     const addProductActivator = (<Button onClick={handleAddProductChange}>Add Products</Button>)
     const modalProductsMarkup = (
         <Modal
@@ -99,17 +120,19 @@ function Products(user) {
             <Card sectioned>
                 <FormLayout>
                     <FormLayout.Group >
-                        <TextField 
+                        <TextField
+                            autoFocus = {true}
                             label="Name" 
                             type="text" 
                             value={productsToAdd.itemName} 
-                            onChange={(productName) => {setProductsToAdd({...productsToAdd, itemName: productName,})} } 
+                            onChange={(productName) => {setProductsToAdd({...productsToAdd, itemName: productName})} } 
                             autoComplete="off" />
                         <TextField 
                             label="Price" 
                             type="number" 
                             value={productsToAdd.price} 
-                            prefix="vnđ" onChange={(productPrice) => {setProductsToAdd({...productsToAdd,  price: productPrice,})} } 
+                            prefix="vnđ" 
+                            onChange={(productPrice) => {setProductsToAdd({...productsToAdd,  price: productPrice})} } 
                             autoComplete="off" />
                     </FormLayout.Group>
                 </FormLayout>
@@ -144,14 +167,14 @@ function Products(user) {
         </>
     )
 
-    const rowMarkup = products.map(
+    const rowMarkup = currentItems.map(
         ({id, itemName, price, quantity}, index) => (
           <IndexTable.Row id={id} key={id} position={index}>
             <IndexTable.Cell>#{id}</IndexTable.Cell>
             <IndexTable.Cell>
               <TextStyle variation="strong">{itemName}</TextStyle>
             </IndexTable.Cell>
-            <IndexTable.Cell>{price}</IndexTable.Cell>
+            <IndexTable.Cell>{price.toLocaleString('it-IT', { currency : 'VND'})}</IndexTable.Cell>
             <IndexTable.Cell>{quantity}</IndexTable.Cell>
             <IndexTable.Cell>{price*quantity}</IndexTable.Cell>
             <IndexTable.Cell>
@@ -197,6 +220,7 @@ function Products(user) {
                 >
                     {rowMarkup}
                 </IndexTable>
+                <Paginate limit={limit} total={totalItems} paginate={paginate} currentPage={currentPage}/>
             </Card>
         </Page>
     );

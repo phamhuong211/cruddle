@@ -188,25 +188,60 @@
       "id": 30
     },
     {
-      "itemName": "Gà tần",
-      "price": "45000",
+      "itemName": "Miến ngan",
+      "price": 35000,
       "userId": 1,
-      "quantity": "34",
+      "quantity": 0,
+      "id": 31
+    },
+    {
+      "itemName": "Bánh bao thịt",
+      "price": 25000,
+      "userId": 1,
+      "quantity": 0,
+      "id": 32
+    },
+    {
+      "itemName": "Gà tần",
+      "price": 55000,
+      "userId": 1,
+      "quantity": 0,
       "id": 33
     },
     {
-      "itemName": "banh mi",
-      "price": "10000",
+      "itemName": "Đùi gà rút xương 500g",
+      "price": 67000,
       "userId": 1,
       "quantity": 0,
       "id": 34
     },
     {
-      "itemName": "Gà nướng",
-      "price": "210000",
+      "itemName": "Bánh gạo cay",
+      "price": 35000,
       "userId": 1,
-      "quantity": "20",
+      "quantity": 0,
       "id": 35
+    },
+    {
+      "itemName": "Chè bưởi",
+      "price": 15000,
+      "userId": 1,
+      "quantity": 0,
+      "id": 36
+    },
+    {
+      "itemName": "Bánh tráng trộn",
+      "price": 20000,
+      "userId": 1,
+      "quantity": 0,
+      "id": 37
+    },
+    {
+      "itemName": "Bánh gà cay",
+      "price": 120000,
+      "userId": 1,
+      "quantity": 0,
+      "id": 38
     }
   ],
   "dashboard": [
