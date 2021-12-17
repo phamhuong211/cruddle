@@ -9,18 +9,25 @@ import {
 
 // array chứa các object {"productId","price", "quantityCart": 1,"productName"}
 const initState = []
+// console.log('init state', initState);
 
 //muốn viết nested reducer cho 1 state thì làm như thế nào?
 
 function reducer(state, action) {
     switch (action.type) {
         case ADD_ITEM: {
-            let indexObj = state.find(obj=> obj.productId === action.payload.productId)
-            if(indexObj) {
-                let stateClone = state
-                stateClone[indexObj].quantityCart += 1
-                return [...stateClone, action.payload]
-            } else return [...state, action.payload]
+            const indexObj = state.findIndex(obj => obj.productId === action.payload.productId)
+            // const objInState = state.find(obj=> obj.productId === action.payload.productId)
+            if(indexObj !== -1) {
+                const stateClone = [...state]
+                const count = stateClone[indexObj].quantityCart;
+                stateClone[indexObj].quantityCart = count + 1
+                console.log('next state', stateClone[indexObj].quantityCart )
+                return stateClone
+            } else {
+                console.log('new item');
+                return [...state, action.payload]
+            }
         }
         case DELETE_ITEM: {
             state = state.filter((element)=>{
@@ -29,6 +36,7 @@ function reducer(state, action) {
             return state
         }
         default:
+            console.log('default');
             return state
     }
 }

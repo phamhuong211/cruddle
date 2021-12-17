@@ -18,7 +18,6 @@ function Products(user) {
 
     const [activeModalAddProduct, setActiveModalAddProduct] = useState(false);
     const [productsToAdd, setProductsToAdd] = useState({itemName: '', price: 0, userId: userId, quantity: 0})
-    console.log(productsToAdd);
     const [activeModalDelete, setActiveMoalDelete] = useState(false)
     const [deleteId, setDeleteId] = useState(null)
     const resourceName = {singular: 'product', plural: 'products'};

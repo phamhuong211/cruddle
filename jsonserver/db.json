@@ -242,6 +242,20 @@
       "userId": 1,
       "quantity": 0,
       "id": 38
+    },
+    {
+      "itemName": "Bánh gà",
+      "price": 33000,
+      "userId": 1,
+      "quantity": 0,
+      "id": 39
+    },
+    {
+      "itemName": "Mì indomies",
+      "price": 6000,
+      "userId": 1,
+      "quantity": 0,
+      "id": 40
     }
   ],
   "dashboard": [

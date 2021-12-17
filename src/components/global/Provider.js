@@ -6,7 +6,7 @@ import logger from './logger';
 
 function GlobalProvider({children}) {
     //tạo Global state từ useReducer
-    const [state, dispatch] = useReducer(logger(reducer), initState)
+    const [state, dispatch] = useReducer(reducer, initState)
 
     return (
         <GlobalConext.Provider value={[state, dispatch]}>

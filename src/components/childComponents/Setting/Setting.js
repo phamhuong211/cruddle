@@ -2,7 +2,7 @@ import { Page } from '@shopify/polaris';
 import React from 'react';
 import ChangeThemeButton from './ChangeThemeButton';
 import ChangeQuotes from './ChangeQuotes';
-import Test from './Test';
+// import Test from './Test';
 
 
 function Setting() {
@@ -11,6 +11,7 @@ function Setting() {
         <Page>
             <ChangeThemeButton/>
             <ChangeQuotes/>
+            {/* <Test/> */}
         </Page>
     );
 }

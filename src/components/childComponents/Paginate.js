@@ -1,5 +1,5 @@
 import { Button, TextContainer } from '@shopify/polaris';
-import React, { useState } from 'react';
+import React from 'react';
 import {
     ChevronLeftMinor,
     ChevronRightMinor

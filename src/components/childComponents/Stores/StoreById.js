@@ -22,6 +22,7 @@ function StoreById() {
     /**Handle Cart with Global context and useReducer */
     const [state, dispatch] = useGlobal()
     const handleClick = (product) => {
+        console.log('click');
         dispatch(actions.addItem({
             "productId": product.id,
             "price": product.price,

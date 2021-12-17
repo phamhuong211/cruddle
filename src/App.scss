@@ -1,3 +1,8 @@
+$base_font: 16px;
+$text-color-hover: #afb0f3;
+
+
+
 *{
     margin: 0px;
     padding: 0
@@ -21,14 +26,6 @@ a {
     .barchart{
         .recharts-wrapper {
             font-size: 12px;
-            .recharts-surface{
-                .recharts-layer:first-child {
-                    font-size: 12px;
-                    g .recharts-cartesian-axis-ticks {
-                        color: red !important;
-                    }
-                }
-            }
         }
     }
 
@@ -60,12 +57,11 @@ a {
             background: none;
             border: none;
             .active {
-                color: #afb0f3;
+                color: $text-color-hover;
             }
-        }
-    
-        button:hover {
-            background: #afb0f3;
+            &:hover{
+                background: $text-color-hover;
+            }
         }
     }
 

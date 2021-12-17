@@ -40,6 +40,10 @@ function AppNavigation() {
                         label: "Cart",
                         badge: `${cart}`,
                         icon: CartMajor
+                    },
+                    {
+                        url: "/users",
+                        label: "Test combine reducer"
                     }
                 ]}
             />

@@ -13,6 +13,7 @@ function Cart() {
     const handleDelete = (productId) => {
         dispatch(actions.deleteItem(productId))
     }
+
     return state.length > 0 ? (
         <Page>
             <div className="row" >
